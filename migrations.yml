@@ -1,0 +1,4 @@
+name: Database migrations
+migrations_namespace: Migrations
+table_name: migrations
+migrations_directory: /migrations

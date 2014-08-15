@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+/**
+* Migrations CLI Application
+*
+* Usage:
+* $ ./doctrine migrations:status
+* $ ./doctrine migrations:migrate
+* $ ./doctrine migrations:generate
+*/
+
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/src/database.php';
+require __DIR__ . '/src/environment.php';
+ 
+use Doctrine\DBAL\DriverManager;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Helper\HelperSet;
+
+$db = getDatabaseConnection(
+    getenv('DB_NAME'),
+    getenv('DB_USER'),
+    getenv('DB_PASS')
+);
+ 
+$helper_set = new HelperSet([
+    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($db),
+    'dialog' => new \Symfony\Component\Console\Helper\DialogHelper,
+]);
+ 
+$console = new Application;
+$console->setHelperSet($helper_set);
+$console->addCommands([
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand,
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand,
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\GenerateCommand,
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand,
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand,
+    new \Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand,
+]);
+ 
+$console->run();

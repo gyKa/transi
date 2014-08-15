@@ -7,7 +7,7 @@
         "silex/silex": "1.2.1"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "1.5.3",
+        "squizlabs/php_codesniffer": "1.5.4",
         "phpmd/phpmd" : "2.0.0"
     }
 }

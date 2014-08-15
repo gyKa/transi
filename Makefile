@@ -3,3 +3,5 @@ phpcs:
 
 phpmd:
 	vendor/bin/phpmd src/,public/,doctrine text codesize,unusedcode,naming
+
+build: phpmd phpcs

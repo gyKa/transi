@@ -4,5 +4,9 @@
         "vlucas/phpdotenv": "1.0.6",
         "symfony/console": "2.5.3",
         "symfony/yaml": "2.5.3"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.5.3",
+        "phpmd/phpmd" : "2.0.0"
     }
 }

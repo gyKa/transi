@@ -7,9 +7,12 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git apache2 php5
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -q -y mysql-server phpmyadmin
-sudo ln -s /usr/share/phpmyadmin /var/www/html/
+sudo rm -rf /var/www/html/
+sudo ln -s /vagrant/public/ /var/www/html
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/phpmyadmin/config.inc.php
 sudo mv config.inc.php /etc/phpmyadmin/
+wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/apache2.conf
+sudo mv apache2.conf /etc/apache2/
 mysql -u root -e "create database transi"
 cd /vagrant
 echo "DB_NAME=transi" > .env

@@ -3,7 +3,12 @@
 
 # Script for provisioning.
 $script = <<SCRIPT
-sudo apt-get install -y apache2
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y git apache2 php5
+cd /vagrant
+curl -sS https://getcomposer.org/installer | php
+php composer.phar install
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!

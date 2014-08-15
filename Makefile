@@ -1,5 +1,5 @@
 phpcs:
-	vendor/bin/phpcs --standard=PSR2 migrations/ src/ doctrine
+	vendor/bin/phpcs --standard=PSR2 migrations/ src/ public/ doctrine
 
 phpmd:
-	vendor/bin/phpmd src/,doctrine text codesize,unusedcode,naming
+	vendor/bin/phpmd src/,public/,doctrine text codesize,unusedcode,naming

@@ -6,7 +6,15 @@ $script = <<SCRIPT
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get install -y git apache2 php5
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -q -y mysql-server phpmyadmin
+sudo ln -s /usr/share/phpmyadmin /var/www/html/
+wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/phpmyadmin/config.inc.php
+sudo mv config.inc.php /etc/phpmyadmin/
+mysql -u root -e "create database transi"
 cd /vagrant
+echo "DB_NAME=transi" > .env
+echo "DB_USER=root" >> .env
+echo "DB_PASS=" >> .env
 curl -sS https://getcomposer.org/installer | php
 php composer.phar install
 SCRIPT

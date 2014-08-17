@@ -6,9 +6,11 @@
 
 * PHP 5.4 (or later)
 
-### Installation
+### Available commands
 
-`make install` - for production
+`make install` - installation for production
+
+`make update` - updates source and runs migrations for production
 
 ### Code quality assurance
 

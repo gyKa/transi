@@ -22,3 +22,10 @@ install:
 	printf "DB_USER=\n" >> .env
 	printf "DB_PASS=\n" >> .env
 	printf "DB_HOST=\n" >> .env
+	# Set doctrine as executable file.
+	chmod +x doctrine
+
+# Update for production only.
+update:
+	git pull
+	./doctrine migrations:migrate --no-interaction

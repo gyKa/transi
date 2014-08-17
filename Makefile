@@ -28,4 +28,5 @@ install:
 # Update for production only.
 update:
 	git pull
+	php composer.phar update --no-dev
 	./doctrine migrations:migrate --no-interaction

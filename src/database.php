@@ -2,9 +2,15 @@
 
 function getDatabaseConnection($database, $user, $password, $host = '127.0.0.1')
 {
-    $config = new \Doctrine\DBAL\Configuration();
+    return \Doctrine\DBAL\DriverManager::getConnection(
+        getDatabaseParams($database, $user, $password, $host),
+        new \Doctrine\DBAL\Configuration()
+    );
+}
 
-    $connection_params = [
+function getDatabaseParams($database, $user, $password, $host)
+{
+    return [
         'dbname' => $database,
         'user' => $user,
         'password' => $password,
@@ -12,6 +18,4 @@ function getDatabaseConnection($database, $user, $password, $host = '127.0.0.1')
         'driver' => 'pdo_mysql',
         'charset'   => 'utf8',
     ];
-
-    return \Doctrine\DBAL\DriverManager::getConnection($connection_params, $config);
 }

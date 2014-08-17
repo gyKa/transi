@@ -10,7 +10,7 @@
 
 `make install` - installation for production
 
-`make update` - updates source and runs migrations for production
+`make update` - updates source, libraries and runs migrations for production
 
 ### Code quality assurance
 

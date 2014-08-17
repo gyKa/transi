@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>transi</title>
+  </head>
+  <body>
+    {% for vehicle in vehicles %}
+      {{ vehicle.title }}
+    {% else %}
+      No vehicles have been found.
+    {% endfor %}
+  </body>
+</html>

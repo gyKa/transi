@@ -2,6 +2,6 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-$app = new Silex\Application();
+$app = require __DIR__.'/../src/bootstrap.php';
 
 $app->run();

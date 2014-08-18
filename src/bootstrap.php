@@ -18,6 +18,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+$app['debug'] = getenv('DEBUG');
+
 $app->get('/', function () use ($app) {
     $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
 

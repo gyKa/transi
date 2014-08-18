@@ -25,6 +25,25 @@ install:
 	# Set doctrine as executable file.
 	chmod +x doctrine
 
+# Installation for development only.
+install-dev:
+	# Install Composer.
+	curl -sS https://getcomposer.org/installer | php
+	# Install dependencies.
+	php composer.phar install
+	# Create environment file.
+	touch .env
+	# Prepare environment variables.
+	printf "DB_NAME=transi\n" >> .env
+	printf "DB_USER=root\n" >> .env
+	printf "DB_PASS=\n" >> .env
+	printf "DB_HOST=\n" >> .env
+	printf "DEBUG=true\n" >> .env
+	# Set doctrine as executable file.
+	chmod +x doctrine
+	# Run database migrations.
+	./doctrine migrations:migrate --no-interaction
+
 # Update for production only.
 update:
 	git pull

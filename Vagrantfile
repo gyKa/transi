@@ -13,13 +13,12 @@ wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/phpmyadmin/
 sudo mv config.inc.php /etc/phpmyadmin/
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/apache2.conf
 sudo mv apache2.conf /etc/apache2/
+sudo a2enmod rewrite
+wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/sites-available/000-default.conf
+sudo mv 000-default.conf /etc/apache2/sites-available/
+sudo service apache2 restart
 mysql -u root -e "create database transi"
-cd /vagrant
-echo "DB_NAME=transi" > .env
-echo "DB_USER=root" >> .env
-echo "DB_PASS=" >> .env
-curl -sS https://getcomposer.org/installer | php
-php composer.phar install
+make install-dev -C /vagrant
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!

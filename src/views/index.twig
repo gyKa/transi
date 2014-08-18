@@ -3,12 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>transi</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-    {% for vehicle in vehicles %}
-      {{ vehicle.title }}
-    {% else %}
-      No vehicles have been found.
-    {% endfor %}
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">Vehicles</div>
+        {% if vehicles %}
+          <ul class="list-group">
+            {% for vehicle in vehicles %}
+              <li class="list-group-item">{{ vehicle.title }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <div class="panel-body">
+            No vehicles have been found.
+          </div>
+        {% endif%}
+      </div>
+    </div>
   </body>
 </html>

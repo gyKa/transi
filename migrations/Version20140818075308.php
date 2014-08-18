@@ -18,7 +18,7 @@ class Version20140818075308 extends AbstractMigration
                 PRIMARY KEY (`id`),
                 KEY `vehicle_id` (`vehicle_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;'
-        ); 
+        );
 
         $this->addSql(
             'ALTER TABLE `trips`

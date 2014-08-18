@@ -19,7 +19,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->get('/', function () use ($app) {
-    $vehicles = $app['db']->fetchAll('SELECT title FROM vehicles');
+    $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
 
     return $app['twig']->render('index.twig', [
         'vehicles' => $vehicles,

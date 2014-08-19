@@ -7,20 +7,27 @@
   </head>
   <body>
     <div class="container">
-      <div class="panel panel-default">
-        <div class="panel-heading">Vehicles</div>
-        {% if vehicles %}
-          <div class="list-group">
-            {% for vehicle in vehicles %}
-              <a href="vehicles/{{ vehicle.id }}" class="list-group-item">{{ vehicle.title }}</a>
-            {% endfor %}
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">Vehicles</div>
+            {% if vehicles %}
+              <div class="list-group">
+                {% for vehicle in vehicles %}
+                  <a href="vehicles/{{ vehicle.id }}" class="list-group-item">{{ vehicle.title }}</a>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="panel-body">
+                No vehicles have been found.
+              </div>
+            {% endif%}
           </div>
-        {% else %}
-          <div class="panel-body">
-            No vehicles have been found.
-          </div>
-        {% endif%}
+        </div>
+        <div class="col-md-9" id="vehicle"></div>
       </div>
     </div>
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

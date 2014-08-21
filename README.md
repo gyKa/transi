@@ -5,6 +5,7 @@
 ### System requirements
 
 * PHP 5.4 (or later)
+* MySQL
 
 ### Available commands
 

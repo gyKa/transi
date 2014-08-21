@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+
 require __DIR__.'/environment.php';
 require __DIR__.'/database.php';
 
@@ -18,13 +20,21 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+$app->register(new Silex\Provider\SessionServiceProvider());
+
 $app['debug'] = getenv('DEBUG');
 
 $app->get('/', function () use ($app) {
     $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
+    $is_admin = false;
+
+    if (!is_null($app['session']->get('admin_mode'))) {
+        $is_admin = true;
+    }
 
     return $app['twig']->render('index.twig', [
         'vehicles' => $vehicles,
+        'is_admin' => $is_admin,
     ]);
 });
 
@@ -50,6 +60,25 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     return $app['twig']->render('vehicle.twig', [
         'vehicle' => $vehicle,
     ]);
+});
+
+$app->post('/login', function (Request $request) use ($app) {
+    $email = $request->get('email');
+    $password = $request->get('password');
+
+    if ($email === getenv('ADMIN_USER') && $password === getenv('ADMIN_PASS')) {
+        $app['session']->set('admin_mode', true);
+    } else {
+        $app['session']->getFlashBag()->add('errors', 'The email or password is incorrect!');
+    }
+
+    return $app->redirect('/');
+});
+
+$app->get('/logout', function () use ($app) {
+    $app['session']->invalidate();
+
+    return $app->redirect('/');
 });
 
 return $app;

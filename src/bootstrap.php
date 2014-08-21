@@ -67,7 +67,7 @@ $app->post('/login', function (Request $request) use ($app) {
     $email = $request->get('email');
     $password = $request->get('password');
 
-    if ($email === getenv('ADMIN_USER') && $password === getenv('ADMIN_PASS')) {
+    if ($email === getenv('ADMIN_EMAIL') && $password === getenv('ADMIN_PASS')) {
         $app['session']->set('admin_mode', true);
     } else {
         $app['session']->getFlashBag()->add('errors', 'The email or password is incorrect!');

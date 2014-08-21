@@ -42,6 +42,7 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     // Use LEFT JOIN, because there can be exists a vehicle without any trips.
     $vehicle = $app['db']->fetchAssoc(
         'SELECT
+            vehicles.title,
             SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 7 DAY), trips.distance, 0)) as total_distance_week,
             SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 4 WEEK), trips.distance, 0)) as total_distance_month,
             SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 365 DAY), trips.distance, 0)) as total_distance_year,

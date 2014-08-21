@@ -7,7 +7,7 @@ phpmd:
 	vendor/bin/phpmd src/,public/,doctrine text codesize,unusedcode,naming
 
 # Runs tools for code quality assurance.
-build: phpmd phpcs
+check: phpmd phpcs
 
 # Installation for production only.
 install:

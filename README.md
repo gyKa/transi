@@ -20,4 +20,4 @@
 
 `make phpcs` - runs PHP CodeSniffer
 
-`make build` - runs above commands in sequence
+`make check` - runs above commands in sequence

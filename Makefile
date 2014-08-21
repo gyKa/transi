@@ -1,6 +1,6 @@
 # PHP code sniffer.
 phpcs:
-	vendor/bin/phpcs --standard=PSR2 migrations/ src/ public/ doctrine
+	vendor/bin/phpcs --standard=PSR2 --extensions=php migrations/ src/ public/ doctrine
 
 # PHP mess detector.
 phpmd:

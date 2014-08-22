@@ -14,7 +14,7 @@ install:
 	# Install Composer.
 	curl -sS https://getcomposer.org/installer | php
 	# Install dependencies.
-	php composer.phar install --no-dev
+	php composer.phar install --no-dev --prefer-source --no-interaction
 	# Create environment file.
 	touch .env
 	# Prepare environment variables.

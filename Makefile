@@ -30,7 +30,7 @@ install-dev:
 	# Install Composer.
 	curl -sS https://getcomposer.org/installer | php
 	# Install dependencies.
-	php composer.phar install
+	php composer.phar install --prefer-source --no-interaction
 	# Create environment file.
 	touch .env
 	# Prepare environment variables.

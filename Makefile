@@ -50,6 +50,7 @@ update:
 	php composer.phar update --no-dev
 	./doctrine migrations:migrate --no-interaction
 
+# Installation and preparation for CodeShip only.
 codeship:
 	# Install Composer.
 	curl -sS https://getcomposer.org/installer | php

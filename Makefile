@@ -49,3 +49,21 @@ update:
 	git pull
 	php composer.phar update --no-dev
 	./doctrine migrations:migrate --no-interaction
+
+codeship:
+	# Install Composer.
+	curl -sS https://getcomposer.org/installer | php
+	# Install dependencies.
+	php composer.phar install --prefer-source --no-interaction
+	# Create environment file.
+	touch .env
+	# Prepare environment variables.
+	printf "DB_NAME=development${TEST_ENV_NUMBER}\n" >> .env
+	printf "DB_USER=${MYSQL_USER}\n" >> .env
+	printf "DB_PASS=${MYSQL_PASSWORD}\n" >> .env
+	printf "DB_HOST=\n" >> .env
+	printf "DEBUG=true\n" >> .env
+	# Set doctrine as executable file.
+	chmod +x doctrine
+	# Run database migrations.
+	./doctrine migrations:migrate --no-interaction

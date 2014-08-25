@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>transi</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.custom.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ app.request.baseUrl }}/">transi</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+          {% block navigation %}{% endblock %}
+          {% if app.session.get('admin_mode') %}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{{ app.request.baseUrl }}/logout">Log out</a></li>
+            </ul>
+          {% else %}
+            <form class="navbar-form navbar-right" action="{{ app.request.baseUrl }}/login" method="post" role="form">
+              <div class="form-group">
+                <input type="text" name="email" placeholder="Email" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-default">Log in</button>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        {% for message in app.session.getFlashBag.get('errors') %}
+          <p class="text-danger">{{ message }}</p>
+        {% endfor %}
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+    <script src="/js/transition.js"></script>
+    <script src="/js/collapse.js"></script>
+  </body>
+</html>

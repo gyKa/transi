@@ -26,15 +26,9 @@ $app['debug'] = getenv('DEBUG');
 
 $app->get('/', function () use ($app) {
     $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
-    $is_admin = false;
-
-    if (!is_null($app['session']->get('admin_mode'))) {
-        $is_admin = true;
-    }
 
     return $app['twig']->render('index.twig', [
         'vehicles' => $vehicles,
-        'is_admin' => $is_admin,
     ]);
 });
 

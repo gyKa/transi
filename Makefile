@@ -52,6 +52,8 @@ update:
 
 # Installation and preparation for CodeShip only.
 codeship:
+	# Install gems.
+	bundler install
 	# Install Composer.
 	curl -sS https://getcomposer.org/installer | php
 	# Install dependencies.

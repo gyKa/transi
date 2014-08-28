@@ -26,7 +26,7 @@ install:
 	chmod +x doctrine
 
 # Installation for development only.
-install-dev:
+dev-install:
 	# Install Composer.
 	curl -sS https://getcomposer.org/installer | php
 	# Install dependencies.

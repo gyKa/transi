@@ -18,7 +18,7 @@ wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/sit
 sudo mv 000-default.conf /etc/apache2/sites-available/
 sudo service apache2 restart
 mysql -u root -e "create database transi"
-make install-dev -C /vagrant
+make dev-install -C /vagrant
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!

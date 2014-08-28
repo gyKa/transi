@@ -16,6 +16,8 @@
 
 `make update` - updates source, libraries and runs migrations for production
 
+`make codeship` - prepare environment for CodeShip.
+
 ### Code quality assurance
 
 `make phpmd` - runs PHP Mess Detector

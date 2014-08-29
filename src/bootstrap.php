@@ -53,8 +53,14 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
         $app->abort(404, 'Vehicle does not exist!');
     }
 
+    $activities = $app['db']->fetchAll(
+        'SELECT `date`, `distance` FROM `trips` WHERE vehicle_id = ? ORDER BY `id` DESC',
+        [(int)$id]
+    );
+
     return $app['twig']->render('vehicle.twig', [
         'vehicle' => $vehicle,
+        'activities' => $activities,
     ]);
 });
 

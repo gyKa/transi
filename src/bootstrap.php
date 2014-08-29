@@ -36,6 +36,7 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     // Use LEFT JOIN, because there can be exists a vehicle without any trips.
     $vehicle = $app['db']->fetchAssoc(
         'SELECT
+            vehicles.id,
             vehicles.title,
             SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 7 DAY), trips.distance, 0)) as total_distance_week,
             SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 4 WEEK), trips.distance, 0)) as total_distance_month,
@@ -57,6 +58,43 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     ]);
 });
 
+$app->get('/vehicles/{id}/add_trip', function ($id) use ($app) {
+    $title = $app['db']->fetchColumn(
+        'SELECT title FROM vehicles WHERE id = ?',
+        [(int)$id]
+    );
+
+    return $app['twig']->render('add_trip.twig', [
+        'vehicle_id' => $id,
+        'vehicle_title' => $title,
+    ]);
+});
+
+$app->post('/trips', function (Request $request) use ($app) {
+    $vehicle_id = $request->get('vehicle_id');
+    $distance = $request->get('distance');
+
+    $id = $app['db']->fetchColumn(
+        'SELECT id FROM vehicles WHERE id = ?',
+        [(int)$vehicle_id]
+    );
+
+    if ($id) {
+        $app['db']->insert(
+            'trips',
+            ['vehicle_id' => $vehicle_id, 'date' => date('Y-m-d'), 'distance' => $distance]
+        );
+
+        $app['session']->getFlashBag()->add('success', 'New trip is added!');
+
+        return $app->redirect('/vehicles/'.$vehicle_id);
+    }
+
+    $app['session']->getFlashBag()->add('danger', 'Vehicle does not exist!');
+
+    return $app->redirect('/');
+});
+
 $app->post('/login', function (Request $request) use ($app) {
     $email = $request->get('email');
     $password = $request->get('password');
@@ -64,7 +102,7 @@ $app->post('/login', function (Request $request) use ($app) {
     if ($email === getenv('ADMIN_EMAIL') && $password === getenv('ADMIN_PASS')) {
         $app['session']->set('admin_mode', true);
     } else {
-        $app['session']->getFlashBag()->add('errors', 'The email or password is incorrect!');
+        $app['session']->getFlashBag()->add('danger', 'The email or password is incorrect!');
     }
 
     return $app->redirect('/');

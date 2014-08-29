@@ -1,5 +1,15 @@
 {% extends "layout.twig" %}
 
+{% block navigation %}
+  {% if app.session.get('admin_mode') %}
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/vehicles/{{ vehicle.id }}/add_trip">Add trip</a>
+      </li>
+    </ul>
+  {% endif %}
+{% endblock %}
+
 {% block content %}
   <div class="row">
     <h1 class="page-header">{{ vehicle.title }}</h1>

@@ -13,3 +13,31 @@
     No vehicles have been found.
   {% endif%}
 {% endblock %}
+
+{% block content %}
+  <div class="row">
+    <h2 class="page-header">All latest activities</h2>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Vehicle</th>
+        <th>Distance</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for item in activities %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ item.date }}</td>
+          <td><a href="/vehicles/{{ item.id}}">{{ item.title }}</a></td>
+          <td>{{ item.distance }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

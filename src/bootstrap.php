@@ -26,9 +26,20 @@ $app['debug'] = getenv('DEBUG');
 
 $app->get('/', function () use ($app) {
     $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
+    $activities = $app['db']->fetchAll(
+        'SELECT
+            `trips`.`date`,
+            `vehicles`.`id`,
+            `vehicles`.`title`,
+            `trips`.`distance`
+        FROM `trips`
+        CROSS JOIN vehicles ON `trips`.`vehicle_id` = `vehicles`.`id`
+        ORDER BY `trips`.`id` DESC'
+    );
 
     return $app['twig']->render('index.twig', [
         'vehicles' => $vehicles,
+        'activities' => $activities,
     ]);
 });
 

@@ -1,6 +1,7 @@
 ## transi
 
 [![Codeship Status for gyKa/transi](https://www.codeship.io/projects/72b86db0-0c02-0132-b895-1a6ea54ccc5e/status)](https://www.codeship.io/projects/32092)
+[![Build Status](https://travis-ci.org/gyKa/transi.svg?branch=master)](https://travis-ci.org/gyKa/transi)
 [![Dependency Status](https://www.versioneye.com/user/projects/53ee6f0f13bb06f7cc000330/badge.svg?style=flat)](https://www.versioneye.com/user/projects/53ee6f0f13bb06f7cc000330)
 
 ### System requirements

@@ -67,8 +67,6 @@ codeship: composer.phar
 travis: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
-	# Create environment file.
-	touch .env
 	# Prepare environment variables.
 	printf "DB_NAME=transi\n" >> .env
 	printf "DB_USER=travis\n" >> .env

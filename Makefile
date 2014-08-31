@@ -69,7 +69,6 @@ travis: composer.phar
 	php composer.phar install --prefer-source --no-interaction
 	# Prepare environment variables.
 	printf "DB_NAME=transi\n" >> .env
-	printf "DB_USER=travis\n" >> .env
 	printf "DB_PASS=\n" >> .env
 	printf "DB_HOST=127.0.0.1\n" >> .env
 	printf "DEBUG=true\n" >> .env

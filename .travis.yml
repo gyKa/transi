@@ -14,7 +14,7 @@ install: true
 before_script:
   - touch .env
   - if [[ "$DB" == "mysql" ]]; then mysql -e 'create database transi;'; printf "DB_USER=travis\n" >> .env; fi
-  - if [[ "$DB" == "postgresql" ]]; then psql -c 'create database transi' -U postgres; printf "DB_USER=postgres\n" >> .env fi
+  - if [[ "$DB" == "postgresql" ]]; then psql -c 'create database transi' -U postgres; printf "DB_USER=postgres\n" >> .env; fi
   - make travis
 
 script:

@@ -19,6 +19,8 @@
 
 `make codeship` - prepare environment for CodeShip.
 
+`make travis` - prepare environment for Travis.
+
 ### Code quality assurance
 
 `make phpmd` - runs PHP Mess Detector

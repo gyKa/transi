@@ -5,7 +5,10 @@ php:
   - 5.5
   - 5.4
 
-install: make dev-install
+install: make travis
+
+before_script:
+  - mysql -e 'create database transi;'
 
 script:
   - make check

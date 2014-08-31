@@ -10,9 +10,7 @@ phpmd:
 check: phpmd phpcs
 
 # Installation for production only.
-install:
-	# Install Composer.
-	curl -sS https://getcomposer.org/installer | php
+install: composer.phar
 	# Install dependencies.
 	php composer.phar install --no-dev --prefer-source --no-interaction
 	# Create environment file.
@@ -26,9 +24,7 @@ install:
 	chmod +x doctrine
 
 # Installation for development only.
-dev-install:
-	# Install Composer.
-	curl -sS https://getcomposer.org/installer | php
+dev-install: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
 	# Create environment file.
@@ -45,15 +41,13 @@ dev-install:
 	./doctrine migrations:migrate --no-interaction
 
 # Update for production only.
-update:
+update: composer.phar
 	git pull
 	php composer.phar update --no-dev
 	./doctrine migrations:migrate --no-interaction
 
 # Installation and preparation for CodeShip only.
-codeship:
-	# Install Composer.
-	curl -sS https://getcomposer.org/installer | php
+codeship: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
 	# Create environment file.
@@ -68,3 +62,23 @@ codeship:
 	chmod +x doctrine
 	# Run database migrations.
 	./doctrine migrations:migrate --no-interaction
+
+# Installation and preparation for Travis only.
+travis: composer.phar
+	# Install dependencies.
+	php composer.phar install --prefer-source --no-interaction
+	# Create environment file.
+	touch .env
+	# Prepare environment variables.
+	printf "DB_NAME=transi\n" >> .env
+	printf "DB_USER=travis\n" >> .env
+	printf "DB_PASS=\n" >> .env
+	printf "DB_HOST=127.0.0.1\n" >> .env
+	printf "DEBUG=true\n" >> .env
+	# Set doctrine as executable file.
+	chmod +x doctrine
+	# Run database migrations.
+	./doctrine migrations:migrate --no-interaction
+
+composer.phar:
+	curl -sS https://getcomposer.org/installer | php

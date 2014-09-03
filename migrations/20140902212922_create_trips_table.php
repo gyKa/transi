@@ -15,8 +15,8 @@ class CreateTripsTable extends AbstractMigration
         $table = $this->table('trips');
         $table->addColumn('vehicle_id', 'integer')
               ->addColumn('date', 'date')
-              ->addColumn('distance', 'float', array('limit' => '8,2'))
-              ->addForeignKey('vehicle_id', 'vehicles', 'id', array('delete'=> 'CASCADE', 'update'=> 'CASCADE'))
+              ->addColumn('distance', 'float', ['precision' => 8, 'scale' => 2])
+              ->addForeignKey('vehicle_id', 'vehicles', 'id', ['delete'=> 'CASCADE', 'update'=> 'CASCADE'])
               ->create();
     }
     

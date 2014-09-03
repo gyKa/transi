@@ -13,7 +13,7 @@ class CreateVehiclesTable extends AbstractMigration
     public function change()
     {
         $table = $this->table('vehicles');
-        $table->addColumn('title', 'string', array('limit' => 20))
+        $table->addColumn('title', 'string', ['limit' => 20])
               ->create();
     }
     

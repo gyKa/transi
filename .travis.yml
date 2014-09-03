@@ -12,6 +12,8 @@ env:
 install: true
 
 before_script:
+  - sudo service postgresql stop
+  - sudo service postgresql start
   - touch .env
   - if [[ "$DB" == "mysql" ]]; then mysql -e 'create database transi;'; fi
   - if [[ "$DB" == "pgsql" ]]; then psql -c 'create database transi;' -U postgres; fi

@@ -45,6 +45,8 @@ update: composer.phar
 codeship: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
+	# Create environment file.
+	touch .env
 	# Run database migrations.
 	vendor/bin/phinx migrate -c src/databases/config.php -e codeship
 

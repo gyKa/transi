@@ -58,7 +58,7 @@ travis: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
 	# Run database migrations.
-	vendor/bin/phinx migrate -c src/databases/config.php
+	vendor/bin/phinx migrate -c src/databases/config.php -e travis-${DB}
 
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php

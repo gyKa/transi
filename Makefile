@@ -57,11 +57,6 @@ codeship: composer.phar
 travis: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
-	# Prepare environment variables.
-	printf "DB_NAME=transi\n" >> .env
-	printf "DB_PASS=\n" >> .env
-	printf "DB_HOST=127.0.0.1\n" >> .env
-	printf "DEBUG=true\n" >> .env
 	# Run database migrations.
 	vendor/bin/phinx migrate -c src/database/config.php
 

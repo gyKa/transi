@@ -2,18 +2,32 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-require __DIR__.'/environment.php';
-require __DIR__.'/database.php';
+/* There are some environment variables:
+ * > APP_ENV - sets aplication environment (default - development);
+ * > DEBUG - turns on or turns off debug mode;
+ */
+Dotenv::load(__DIR__.'/..');
+
+$db_config = require __DIR__.'/databases/config.php';
 
 $app = new Silex\Application();
 
+$default_db_connection = $db_config['environments']['default_database'];
+$app_env = getenv('APP_ENV');
+
+if (isset($app_env) && !empty($app_env)) {
+    $default_db_connection = $app_env;
+}
+
 $app->register(new Silex\Provider\DoctrineServiceProvider(), [
-    'db.options' => getDatabaseParams(
-        getenv('DB_NAME'),
-        getenv('DB_USER'),
-        getenv('DB_PASS'),
-        getenv('DB_HOST')
-    )
+    'db.options' => [
+        'dbname' => $db_config['environments'][$default_db_connection]['name'],
+        'user' => $db_config['environments'][$default_db_connection]['user'],
+        'password' => $db_config['environments'][$default_db_connection]['pass'],
+        'host' => $db_config['environments'][$default_db_connection]['host'],
+        'driver' => 'pdo_'.$db_config['environments'][$default_db_connection]['adapter'],
+        'charset' => 'utf8',
+    ]
 ]);
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -130,5 +144,7 @@ $app->get('/logout', function () use ($app) {
 
     return $app->redirect('/');
 });
+
+unset($app_env);
 
 return $app;

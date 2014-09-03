@@ -16,10 +16,13 @@ install: composer.phar
 	# Create environment file.
 	touch .env
 	# Prepare environment variables.
+	printf "DB_ADAPTER=mysql\n" > .env
+	printf "DB_PORT=3306\n" >> .env
 	printf "DB_NAME=\n" >> .env
 	printf "DB_USER=\n" >> .env
 	printf "DB_PASS=\n" >> .env
 	printf "DB_HOST=\n" >> .env
+	printf "APP_ENV=production\n" >> .env
 
 # Installation for development only.
 dev-install: composer.phar
@@ -36,7 +39,7 @@ dev-install: composer.phar
 update: composer.phar
 	git pull
 	php composer.phar update --no-dev
-	vendor/bin/phinx migrate -c src/databases/config.php
+	vendor/bin/phinx migrate -c src/databases/config.php -e production
 
 # Installation and preparation for CodeShip only.
 codeship: composer.phar

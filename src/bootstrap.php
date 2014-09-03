@@ -2,11 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-/* There are some environment variables:
- * > APP_ENV - sets aplication environment (default - development);
- * > DEBUG - turns on or turns off debug mode;
- */
-Dotenv::load(__DIR__.'/..');
+require __DIR__.'/environment.php';
 
 $db_config = require __DIR__.'/databases/config.php';
 

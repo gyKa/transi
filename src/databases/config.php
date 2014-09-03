@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/../environment.php';
+
 return [
     'paths' => [
         'migrations' => __DIR__.'/../../migrations'
@@ -14,6 +16,14 @@ return [
             'user' => 'root',
             'pass' => '',
             'port' => 3306
+        ],
+        'production' => [
+            'adapter' => getenv('DB_ADAPTER'),
+            'host' => getenv('DB_HOST'),
+            'name' => getenv('DB_NAME'),
+            'user' => getenv('DB_USER'),
+            'pass' => getenv('DB_PASS'),
+            'port' => getenv('DB_PORT')
         ],
         'travis-mysql' => [
             'adapter' => 'mysql',

@@ -31,5 +31,13 @@ return [
             'pass' => '',
             'port' => 5432
         ],
+        'codeship' => [
+            'adapter' => 'mysql',
+            'host' => '127.0.0.1',
+            'name' => 'development'.getenv(TEST_ENV_NUMBER),
+            'user' => getenv(MYSQL_USER),
+            'pass' => getenv(MYSQL_PASSWORD),
+            'port' => 3306
+        ],
     ]
 ];

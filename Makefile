@@ -42,16 +42,8 @@ update: composer.phar
 codeship: composer.phar
 	# Install dependencies.
 	php composer.phar install --prefer-source --no-interaction
-	# Create environment file.
-	touch .env
-	# Prepare environment variables.
-	printf "DB_NAME=development${TEST_ENV_NUMBER}\n" >> .env
-	printf "DB_USER=${MYSQL_USER}\n" >> .env
-	printf "DB_PASS=${MYSQL_PASSWORD}\n" >> .env
-	printf "DB_HOST=\n" >> .env
-	printf "DEBUG=true\n" >> .env
 	# Run database migrations.
-	vendor/bin/phinx migrate -c src/databases/config.php
+	vendor/bin/phinx migrate -c src/databases/config.php -e codeship
 
 # Installation and preparation for Travis only.
 travis: composer.phar

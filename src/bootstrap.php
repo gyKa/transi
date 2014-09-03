@@ -100,6 +100,7 @@ $app->get('/vehicles/{id}/add_trip', function ($id) use ($app) {
 $app->post('/trips', function (Request $request) use ($app) {
     $vehicle_id = $request->get('vehicle_id');
     $distance = $request->get('distance');
+    $date = $request->get('date');
 
     $id = $app['db']->fetchColumn(
         'SELECT id FROM vehicles WHERE id = ?',
@@ -109,7 +110,7 @@ $app->post('/trips', function (Request $request) use ($app) {
     if ($id) {
         $app['db']->insert(
             'trips',
-            ['vehicle_id' => $vehicle_id, 'date' => date('Y-m-d'), 'distance' => $distance]
+            ['vehicle_id' => $vehicle_id, 'date' => $date, 'distance' => $distance]
         );
 
         $app['session']->getFlashBag()->add('success', 'New trip is added!');

@@ -7,7 +7,13 @@
 ### System requirements
 
 * PHP 5.4 (or later)
-* MySQL
+* PHP-CLI
+* MySQL or PostgreSQL
+* Apache 2 or Nginx
+* Composer
+* cURL (optional, for downloading Composer only)
+* Make (optional, but highly recommended)
+* Vagrant (optional, for development only)
 
 ### Available commands
 

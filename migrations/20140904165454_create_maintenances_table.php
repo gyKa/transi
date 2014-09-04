@@ -16,8 +16,6 @@ class CreateMaintenancesTable extends AbstractMigration
         $table = $this->table('maintenances');
         $table->addColumn('title', 'string', ['limit' => 15])
               ->create();
-
-        $this->execute('INSERT INTO maintenances (title) VALUES ("Tyre pressure")');
     }
     
     /**

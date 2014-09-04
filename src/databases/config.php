@@ -8,14 +8,22 @@ return [
     ],
     'environments' => [
         'default_migration_table' => 'migrations',
-        'default_database' => 'development',
-        'development' => [
+        'default_database' => 'dev-mysql',
+        'dev-mysql' => [
             'adapter' => 'mysql',
             'host' => 'localhost',
             'name' => 'transi',
             'user' => 'root',
             'pass' => '',
             'port' => 3306
+        ],
+        'dev-pgsql' => [
+            'adapter' => 'pgsql',
+            'host' => 'localhost',
+            'name' => 'transi',
+            'user' => 'postgres',
+            'pass' => '',
+            'port' => 5432
         ],
         'production' => [
             'adapter' => getenv('DB_ADAPTER'),

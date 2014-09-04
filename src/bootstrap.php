@@ -44,7 +44,7 @@ $app->get('/', function () use ($app) {
             `trips`.`distance`
         FROM `trips`
         CROSS JOIN vehicles ON `trips`.`vehicle_id` = `vehicles`.`id`
-        ORDER BY `trips`.`id` DESC'
+        ORDER BY `trips`.`date` DESC, `trips`.`id` DESC'
     );
 
     return $app['twig']->render('index.twig', [

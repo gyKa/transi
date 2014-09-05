@@ -33,4 +33,6 @@
 
 `make phpcs` - runs PHP CodeSniffer
 
+`make phpcpd` - runs PHP Copy/Paste Detector
+
 `make check` - runs above commands in sequence

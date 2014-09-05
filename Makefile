@@ -6,8 +6,12 @@ phpcs:
 phpmd:
 	vendor/bin/phpmd src/,public/ text codesize,unusedcode,naming
 
+# PHP copy/paste detector.
+phpcpd:
+	vendor/bin/phpcpd src/ public/
+
 # Runs tools for code quality assurance.
-check: phpmd phpcs
+check: phpmd phpcs phpcpd
 
 # Installation for production only.
 install: composer.phar

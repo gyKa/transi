@@ -1,35 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Script for provisioning.
-$script = <<SCRIPT
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y git apache2 php5 postgresql phppgadmin
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -q -y mysql-server phpmyadmin
-sudo rm -rf /var/www/html/
-sudo ln -s /vagrant/public/ /var/www/html
-wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/phpmyadmin/config.inc.php
-sudo mv config.inc.php /etc/phpmyadmin/
-wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/apache2.conf
-sudo mv apache2.conf /etc/apache2/
-wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/conf.d/phppgadmin
-sudo mv phppgadmin /etc/apache2/conf.d/
-wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/usr/share/phppgadmin/conf/config.inc.php
-sudo mv config.inc.php /usr/share/phppgadmin/conf/
-wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/postgresql/9.3/main/pg_hba.conf
-sudo mv pg_hba.conf /etc/postgresql/9.3/main/
-sudo /etc/init.d/postgresql restart
-sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
-psql -c 'create database transi' -U postgres;
-sudo a2enmod rewrite
-wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/sites-available/000-default.conf
-sudo mv 000-default.conf /etc/apache2/sites-available/
-sudo service apache2 restart
-mysql -u root -e "create database transi"
-make dev-install -C /vagrant
-SCRIPT
-
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -86,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # information on available options.
 
   # Enable provisioning with script.
-  config.vm.provision "shell", inline: $script
+  config.vm.provision :shell, path: "provision/setup.sh"
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a

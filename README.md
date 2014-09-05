@@ -36,3 +36,5 @@
 `make phpcpd` - runs PHP Copy/Paste Detector
 
 `make check` - runs above commands in sequence
+
+`make phploc` - runs a tool for quickly measuring the size and analyzing the structure of a PHP project

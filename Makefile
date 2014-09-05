@@ -10,6 +10,9 @@ phpmd:
 phpcpd:
 	vendor/bin/phpcpd src/ public/
 
+phploc:
+	vendor/bin/phploc src/ public/
+
 # Runs tools for code quality assurance.
 check: phpmd phpcs phpcpd
 

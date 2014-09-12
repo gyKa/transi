@@ -59,9 +59,31 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
         'SELECT
             vehicles.id,
             vehicles.title,
-            SUM(IF(activities.date >= DATE_SUB(NOW(), INTERVAL 7 DAY), activities.distance, 0)) as total_distance_week,
-            SUM(IF(activities.date >= DATE_SUB(NOW(), INTERVAL 4 WEEK), activities.distance, 0)) as total_distance_month,
-            SUM(IF(activities.date >= DATE_SUB(NOW(), INTERVAL 365 DAY), activities.distance, 0)) as total_distance_year,
+
+            SUM(
+                IF(
+                    activities.date >= DATE_SUB(NOW(), INTERVAL 7 DAY),
+                    activities.distance,
+                    0
+                )
+            ) as total_distance_week,
+
+            SUM(
+                IF(
+                    activities.date >= DATE_SUB(NOW(), INTERVAL 4 WEEK),
+                    activities.distance,
+                    0
+                )
+            ) as total_distance_month,
+
+            SUM(
+                IF(
+                    activities.date >= DATE_SUB(NOW(), INTERVAL 365 DAY),
+                    activities.distance,
+                    0
+                )
+            ) as total_distance_year,
+
             IFNULL(SUM(activities.distance), 0) as total_distance
         FROM vehicles
         LEFT JOIN activities ON vehicles.id = activities.vehicle_id

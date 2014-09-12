@@ -38,13 +38,13 @@ $app->get('/', function () use ($app) {
     $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
     $activities = $app['db']->fetchAll(
         'SELECT
-            `trips`.`date`,
+            `activities`.`date`,
             `vehicles`.`id`,
             `vehicles`.`title`,
-            `trips`.`distance`
-        FROM `trips`
-        CROSS JOIN vehicles ON `trips`.`vehicle_id` = `vehicles`.`id`
-        ORDER BY `trips`.`date` DESC, `trips`.`id` DESC'
+            `activities`.`distance`
+        FROM `activities`
+        CROSS JOIN vehicles ON `activities`.`vehicle_id` = `vehicles`.`id`
+        ORDER BY `activities`.`date` DESC, `activities`.`id` DESC'
     );
 
     return $app['twig']->render('index.twig', [
@@ -54,17 +54,17 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/vehicles/{id}', function ($id) use ($app) {
-    // Use LEFT JOIN, because there can be exists a vehicle without any trips.
+    // Use LEFT JOIN, because there can be exists a vehicle without any '.
     $vehicle = $app['db']->fetchAssoc(
         'SELECT
             vehicles.id,
             vehicles.title,
-            SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 7 DAY), trips.distance, 0)) as total_distance_week,
-            SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 4 WEEK), trips.distance, 0)) as total_distance_month,
-            SUM(IF(trips.date >= DATE_SUB(NOW(), INTERVAL 365 DAY), trips.distance, 0)) as total_distance_year,
-            IFNULL(SUM(trips.distance), 0) as total_distance
+            SUM(IF(activities.date >= DATE_SUB(NOW(), INTERVAL 7 DAY), activities.distance, 0)) as total_distance_week,
+            SUM(IF(activities.date >= DATE_SUB(NOW(), INTERVAL 4 WEEK), activities.distance, 0)) as total_distance_month,
+            SUM(IF(activities.date >= DATE_SUB(NOW(), INTERVAL 365 DAY), activities.distance, 0)) as total_distance_year,
+            IFNULL(SUM(activities.distance), 0) as total_distance
         FROM vehicles
-        LEFT JOIN trips ON vehicles.id = trips.vehicle_id
+        LEFT JOIN activities ON vehicles.id = activities.vehicle_id
         WHERE vehicles.id = ?',
         [(int)$id]
     );
@@ -75,7 +75,7 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     }
 
     $activities = $app['db']->fetchAll(
-        'SELECT `date`, `distance` FROM `trips` WHERE vehicle_id = ? ORDER BY `date` DESC, `id` DESC',
+        'SELECT `date`, `distance` FROM `activities` WHERE vehicle_id = ? ORDER BY `date` DESC, `id` DESC',
         [(int)$id]
     );
 
@@ -85,19 +85,19 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     ]);
 });
 
-$app->get('/vehicles/{id}/add_trip', function ($id) use ($app) {
+$app->get('/vehicles/{id}/add_activity', function ($id) use ($app) {
     $title = $app['db']->fetchColumn(
         'SELECT title FROM vehicles WHERE id = ?',
         [(int)$id]
     );
 
-    return $app['twig']->render('add_trip.twig', [
+    return $app['twig']->render('add_activity.twig', [
         'vehicle_id' => $id,
         'vehicle_title' => $title,
     ]);
 });
 
-$app->post('/trips', function (Request $request) use ($app) {
+$app->post('/activities', function (Request $request) use ($app) {
     $vehicle_id = $request->get('vehicle_id');
     $distance = $request->get('distance');
     $date = $request->get('date');
@@ -109,11 +109,11 @@ $app->post('/trips', function (Request $request) use ($app) {
 
     if ($id) {
         $app['db']->insert(
-            'trips',
+            'activities',
             ['vehicle_id' => $vehicle_id, 'date' => $date, 'distance' => $distance]
         );
 
-        $app['session']->getFlashBag()->add('success', 'New trip is added!');
+        $app['session']->getFlashBag()->add('success', 'New activity is added!');
 
         return $app->redirect('/vehicles/'.$vehicle_id);
     }

@@ -33,8 +33,10 @@ install: composer.phar
 
 # Installation for development only.
 dev-install: composer.phar
-	# Install dependencies.
+	# Install Composer dependencies.
 	php composer.phar install --prefer-source --no-interaction
+	# Install Bower dependencies.
+	bower install bootstrap --config.interactive=false --allow-root
 	# Create environment file.
 	touch .env
 	# Prepare environment variables.

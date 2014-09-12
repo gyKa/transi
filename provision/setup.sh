@@ -9,6 +9,13 @@ sudo apt-get upgrade -y > /dev/null 2>&1
 echo "==> Installing system packages..."
 sudo apt-get install -y git > /dev/null 2>&1
 
+echo "==> Installing NodeJS and NPM..."
+sudo apt-get install -y nodejs npm > /dev/null 2>&1
+
+echo "==> Installing Bower..."
+sudo npm install -g bower > /dev/null 2>&1
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
 echo "==> Installing WEB server Apache..."
 sudo apt-get install -y apache2 > /dev/null 2>&1
 
@@ -25,11 +32,11 @@ echo "==> Setting up project root..."
 sudo rm -rf /var/www/html/
 sudo ln -s /vagrant/public/ /var/www/html
 
-echo "===> Preparing configuration for phpMyAdmin..."
+echo "==> Preparing configuration for phpMyAdmin..."
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/phpmyadmin/config.inc.php > /dev/null 2>&1
 sudo mv config.inc.php /etc/phpmyadmin/
 
-echo "===> Preparing configuration for Apache..."
+echo "==> Preparing configuration for Apache..."
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/apache2.conf > /dev/null 2>&1
 sudo mv apache2.conf /etc/apache2/
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/sites-available/000-default.conf > /dev/null 2>&1
@@ -37,20 +44,20 @@ sudo mv 000-default.conf /etc/apache2/sites-available/
 sudo a2enmod rewrite
 sudo service apache2 restart > /dev/null 2>&1
 
-echo "===> Preparing configuration for phpPgAdmin..."
+echo "==> Preparing configuration for phpPgAdmin..."
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/apache2/conf.d/phppgadmin > /dev/null 2>&1
 sudo mv phppgadmin /etc/apache2/conf.d/
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/usr/share/phppgadmin/conf/config.inc.php > /dev/null 2>&1
 sudo mv config.inc.php /usr/share/phppgadmin/conf/
 
-echo "===> Preparing configuration for PostgreSQL..."
+echo "==> Preparing configuration for PostgreSQL..."
 wget https://raw.githubusercontent.com/gyKa/setup/master/vagrant/etc/postgresql/9.3/main/pg_hba.conf > /dev/null 2>&1
 sudo mv pg_hba.conf /etc/postgresql/9.3/main/
 sudo /etc/init.d/postgresql restart
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';" > /dev/null
 psql -c 'create database transi' -U postgres > /dev/null
 
-echo "===> Preparing configuration for MySQL..."
+echo "==> Preparing configuration for MySQL..."
 mysql -u root -e "create database transi"
 
 make dev-install -C /vagrant

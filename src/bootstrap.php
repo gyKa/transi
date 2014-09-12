@@ -75,7 +75,7 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
     }
 
     $activities = $app['db']->fetchAll(
-        'SELECT `date`, `distance` FROM `trips` WHERE vehicle_id = ? ORDER BY `id` DESC',
+        'SELECT `date`, `distance` FROM `trips` WHERE vehicle_id = ? ORDER BY `date` DESC, `id` DESC',
         [(int)$id]
     );
 

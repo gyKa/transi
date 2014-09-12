@@ -66,5 +66,11 @@ travis: composer.phar
 	# Run database migrations.
 	vendor/bin/phinx migrate -c src/databases/config.php -e travis-${DB}
 
+# Installation and preparation for Heroku only.
+heroku:
+	php provision/heroku.php
+	vendor/bin/phinx migrate -c src/databases/config.php -e production
+
+
 composer.phar:
 	curl -sS https://getcomposer.org/installer | php

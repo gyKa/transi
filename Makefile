@@ -68,8 +68,7 @@ travis: composer.phar
 
 # Installation and preparation for Heroku only.
 heroku:
-	php provision/heroku.php
-	vendor/bin/phinx migrate -c src/databases/config.php -e production
+	vendor/bin/phinx migrate -c src/databases/config.php -e heroku-cleardb
 
 
 composer.phar:

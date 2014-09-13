@@ -57,5 +57,13 @@ return [
             'pass' => getenv('MYSQL_PASSWORD'),
             'port' => 3306
         ],
+        'heroku-cleardb' => [
+            'adapter' => 'mysql',
+            'host' => getenv('DB_HOST'),
+            'name' => getenv('DB_NAME'),
+            'user' => getenv('DB_USER'),
+            'pass' => getenv('DB_PASS'),
+            'port' => 3306
+        ],
     ]
 ];

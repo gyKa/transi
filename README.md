@@ -16,6 +16,24 @@
 * Make (optional, but highly recommended)
 * Vagrant (optional, for development only)
 
+### Installation
+
+#### Heroku
+
+Add multipack build option:
+
+`heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git`
+
+#### Vagrant
+
+There exist 2 problems I can't solve:
+
+1. NPM fails to run _postinstall_ script while Heroku works well. Need to run:
+
+`cd /vagrant && npm install`
+
+2. PostgreSQL fails to change directory /root for unknown reason. But works well.
+
 ### Available commands
 
 `make install` - installation for production

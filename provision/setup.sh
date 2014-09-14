@@ -12,9 +12,11 @@ sudo apt-get install -y git > /dev/null 2>&1
 echo "==> Installing NodeJS and NPM..."
 sudo apt-get install -y nodejs npm > /dev/null 2>&1
 
-echo "==> Installing Bower..."
-sudo npm install -g bower > /dev/null 2>&1
+echo "==> Installing NPM dependencies into ./node_modules..."
 sudo ln -s /usr/bin/nodejs /usr/bin/node
+cd /vagrant
+npm install --no-bin-link
+cd ~
 
 echo "==> Installing WEB server Apache..."
 sudo apt-get install -y apache2 > /dev/null 2>&1

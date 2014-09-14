@@ -35,8 +35,6 @@ install: composer.phar
 dev-install: composer.phar
 	# Install Composer dependencies.
 	php composer.phar install --prefer-source --no-interaction
-	# Install Bower dependencies.
-	bower install --allow-root
 	# Create environment file.
 	touch .env
 	# Prepare environment variables.

@@ -1,3 +1,4 @@
 {
-    "directory": "public/resources"
+    "directory": "public/resources",
+    "analytics": false
 }

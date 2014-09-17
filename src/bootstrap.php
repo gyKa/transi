@@ -105,7 +105,8 @@ $app->get('/vehicles/{id}', function ($id) use ($app) {
         'vehicle' => $vehicle,
         'activities' => $activities,
     ]);
-});
+})
+->assert('id', '\d+');
 
 $app->get('/vehicles/{id}/add_activity', function ($id) use ($app) {
     $title = $app['db']->fetchColumn(

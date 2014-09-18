@@ -23,6 +23,7 @@
         <div class="navbar-collapse collapse" id="navbar">
           {% block navigation %}{% endblock %}
           {% if app.session.get('admin_mode') %}
+            <a href="/vehicles/add" class="btn btn-success navbar-btn">Add vehicle</a>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="{{ app.request.baseUrl }}/logout">Log out</a></li>
             </ul>

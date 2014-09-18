@@ -1,0 +1,24 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+  <div class="row">
+    <h1 class="page-header">Add new vehicle</h1>
+  </div>
+  <form class="form-horizontal" role="form" method="post" action="/vehicles">
+    <div class="row">
+      <div class="form-group">
+        <label for="title" class="col-md-2 control-label">Title</label>
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="title" name="title">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+          <button type="submit" class="btn btn-default">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

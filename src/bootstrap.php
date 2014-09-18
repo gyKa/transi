@@ -120,6 +120,18 @@ $app->get('/vehicles/{id}/add_activity', function ($id) use ($app) {
     ]);
 });
 
+$app->get('/vehicles/add', function () use ($app) {
+    return $app['twig']->render('add_vehicle.twig');
+});
+
+$app->post('/vehicles', function (Request $request) use ($app) {
+    $app['db']->insert('vehicles', ['title' => $request->get('title')]);
+    
+    $app['session']->getFlashBag()->add('success', 'New vehicle is added!');
+
+    return $app->redirect('/');
+});
+
 $app->post('/activities', function (Request $request) use ($app) {
     $vehicle_id = $request->get('vehicle_id');
     $distance = $request->get('distance');

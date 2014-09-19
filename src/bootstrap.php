@@ -162,7 +162,12 @@ $app->post('/login', function (Request $request) use ($app) {
     $email = $request->get('email');
     $password = $request->get('password');
 
-    if ($email === getenv('ADMIN_EMAIL') && $password === getenv('ADMIN_PASS')) {
+    $hash = $app['db']->fetchColumn(
+        'SELECT password FROM users WHERE email = ? LIMIT 1',
+        [$email]
+    );
+
+    if (password_verify($password, $hash)) {
         $app['session']->set('admin_mode', true);
     } else {
         $app['session']->getFlashBag()->add('danger', 'The email or password is incorrect!');

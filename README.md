@@ -6,7 +6,7 @@
 
 ### System requirements
 
-* PHP 5.4 (or later)
+* PHP 5.5 (or later)
 * PHP-CLI
 * MySQL or PostgreSQL
 * Apache 2 or Nginx

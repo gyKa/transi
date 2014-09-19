@@ -35,6 +35,10 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app['debug'] = getenv('DEBUG');
 
 $app->get('/', function () use ($app) {
+    if ($app['session']->get('admin_mode') === null) {
+        return $app['twig']->render('index.twig');
+    }
+
     $vehicles = $app['db']->fetchAll('SELECT id, title FROM vehicles');
     $activities = $app['db']->fetchAll(
         'SELECT
@@ -47,7 +51,7 @@ $app->get('/', function () use ($app) {
         ORDER BY `activities`.`date` DESC, `activities`.`id` DESC'
     );
 
-    return $app['twig']->render('index.twig', [
+    return $app['twig']->render('home.twig', [
         'vehicles' => $vehicles,
         'activities' => $activities,
     ]);

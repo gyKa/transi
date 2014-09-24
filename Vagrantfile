@@ -57,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # information on available options.
 
   # Enable provisioning with script.
-  config.vm.provision :shell, path: "provision/setup.sh"
+  config.vm.provision :shell, path: "provisioning.sh"
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a

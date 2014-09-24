@@ -26,13 +26,18 @@ Add multipack build option:
 
 #### Vagrant
 
+After installation, GIT requires to setup environment. Run following lines:
+
+`git config --global user.email "your@email.com"`
+`git config --global user.name "Firstname Lastname"`
+
 There exist 2 problems I can't solve:
 
-1. NPM fails to run _postinstall_ script while Heroku works well. Need to run:
+* NPM fails to run _postinstall_ script while Heroku works well. Need to run:
 
 `cd /vagrant && npm install`
 
-2. PostgreSQL fails to change directory /root for unknown reason. But works well.
+* PostgreSQL fails to change directory /root for unknown reason. But works well.
 
 ### Available commands
 

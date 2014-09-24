@@ -41,6 +41,8 @@ dev-install: composer.phar
 	printf "DEBUG=true\n" > .env
 	# Run database migrations.
 	vendor/bin/phinx migrate -c src/databases/config.php
+	# Install pre-commit hook.
+	cp pre-commit.sh .git/hooks/pre-commit
 
 # Update for production only.
 update: composer.phar

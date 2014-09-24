@@ -29,6 +29,7 @@ Add multipack build option:
 After installation, GIT requires to setup environment. Run following lines:
 
 `git config --global user.email "your@email.com"`
+
 `git config --global user.name "Firstname Lastname"`
 
 There exist 2 problems I can't solve:
@@ -59,6 +60,6 @@ There exist 2 problems I can't solve:
 
 `make phpcpd` - runs PHP Copy/Paste Detector
 
-`make check` - runs above commands in sequence
+`make check` - runs above commands in sequence. Git hook `pre-commit` runs it as well.
 
 `make phploc` - runs a tool for quickly measuring the size and analyzing the structure of a PHP project
